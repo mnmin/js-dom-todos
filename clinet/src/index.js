@@ -1,20 +1,29 @@
 const shouldCreate = false
-let todoList = []
+// let todoList = []
+const todoListUl = document.querySelector('#todo-list')
+//console.log("tolist", todoListUl)
+
+const state = {
+    todoList: []
+}
 
 function renderTodos() {
-    const todolistul = documet.querySelector('.todo-list')
+    //const todoListUl = document.querySelector('#todo-list')
 
-    todoList.forEach(todo => {
+    state.todoList.forEach(todo => {
         const li = document.createElement("li")
         // add to ul
+        
         li.classList = "todo-item"
-        li.textContent = item.title
+        li.textContent = todo.title
         li.style.marginBottom = '15px'
-        if (item.completed) {
+        if (todo.completed) {
             li.style.color = 'grey'
             li.style.textDecoration = 'line-through'
         }
-        todoList.append(li)
+        console.log("print li", li)
+        console.log("print ul", todoListUl)
+        todoListUl.append(li)
         
     })
     console.log('render')
@@ -27,7 +36,7 @@ fetch('http://localhost:3000/todos')
   return response.json()
 })
 .then(function (todos) {
-    todoList = todos
+    state.todoList = todos
     console.log("todos", todos)
     renderTodos()
   
@@ -48,5 +57,5 @@ const create = () => {
 }
 
 get()
-create()
+//create()
 renderTodos()
